@@ -1,48 +1,75 @@
-<div class="page-header">
-  <h1>Monostack Test</h1>
+<div
+    isteven-multi-select
+    input-model="categoriesSingle"
+    output-model="selectedCategory"
+    output-properties="id"
+    button-label="title"
+    item-label="title"
+    tick-property="selected"
+    orientation="horizontal"
+    selection-mode="single"
+    on-item-click="fClick( data )"
+    on-reset="fReset()"
+>
 </div>
 
-<div ng-repeat="post in posts">
-  <span style="font-size:20px; margin-left:10px;">
-    <span>
-      {{post.title}}
-    </span>
-    <span>
+<div class="panel-group" style="margin-top:15px">
+  <div class="panel panel-info" ng-repeat="post in posts">
+    <div class="panel-heading">
+      <a href="#/posts/{{post.id}}">{{post.title}}</a>
+    </div>
+
+    <div class="panel-body">
       {{post.body}}
-    </span>
-    <span>
-      {{post.price}}
-    </span>
-  </span>
-  <span>
-    posted by <a ng-href="#/users/{{post.user.username}}">{{post.user.username}}</a>
-  </span>
-  <span>
-    <a href="#/posts/{{post.id}}">Show post</a>
-  </span>
+    </div>
+
+    <div class="panel-footer" style="min-height: 38px">
+      <span ng-show="post.price">
+        Price: {{post.price}}
+      </span>
+      <span class="pull-right">
+        posted by <a ng-href="#/users/{{post.user.username}}">{{post.user.username}}</a>
+      </span>
+    </div>
+  </div>
 </div>
 
 <form ng-submit="addPost()"
   style="margin-top:30px;">
   <h3>Add a new post</h3>
 
-  <div class="form-group">
+  <div
+      isteven-multi-select
+      input-model="categories"
+      output-model="selectedCategories"
+      output-properties="id"
+      button-label="title"
+      item-label="title"
+      tick-property="ticked"
+  >
+  </div>
+
+  <div class="form-group"
+    style="margin-top:15px">
     <input type="text"
     class="form-control"
+    style="width: 100%"
     placeholder="Title"
     ng-model="title"></input>
   </div>
   <div class="form-group">
     <textarea class="form-control" 
-    rows="5" 
+    rows="5"
+    style="resize: none"
     placeholder="Body"
     ng-model="body"></textarea>
   </div>
   <div class="form-group">
     <input type="number"
     class="form-control"
+    style="width: 100%"
     placeholder="Price"
     ng-model="price"></input>
   </div>
-  <button type="submit" class="btn btn-primary">Post</button>
+  <button type="submit" class="btn btn-primary pull-right">Post</button>
 </form>

@@ -2,11 +2,13 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: :create
 
   def index
-    respond_with Post.all
+    respond_with Post.where(status: 'approved')
   end
 
   def create
-    respond_with Post.create(post_params.merge(user_id: current_user.id))
+    post = Post.create(post_params.merge(user_id: current_user.id))
+    post.categories << Category.where(id: params[:categories].map { |e| e[:id] })
+    respond_with post
   end
 
   def show

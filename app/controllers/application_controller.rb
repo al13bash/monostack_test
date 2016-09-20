@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     render 'layouts/application'
   end
 
+  def access_denied(_exception)
+    redirect_to root_path
+  end
+
   private
 
   def configure_permitted_parameters

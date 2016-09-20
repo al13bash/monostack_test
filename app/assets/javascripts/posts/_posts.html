@@ -4,21 +4,27 @@
       {{post.title}}
     </span>
   </h1>
-  <span style="font-size:20px">
-    {{post.body}}
-    <br>
-    {{post.price}}
-  </span>
+  <div class="panel-default">
+    <span style="font-size:20px">
+      {{post.body}}
+      <br>
+      <span ng-show="post.price">
+        Price: {{post.price}}
+      </span>
+    </span>
+  </div>
 </div>
 
 <h3>Categories</h3>
-<div ng-repeat="category in post.categories">
-  <span style="font-size:20px; margin-left:10px;">
-    {{category.title}}
-    <br>
-    {{category.body}}
-  </span>
-  <br>
+<div class="panel-group">
+  <div class="col-md-3" ng-repeat="category in post.categories">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+          {{category.title}}
+        </div>
+        <div class="panel-body">
+          {{category.body}}
+        </div>
+      </div>
+    </div>
 </div>
-
-<a href="#/home">Back</a>

@@ -1,9 +1,8 @@
-angular.module('monostackTest', ['ui.router', 'templates', 'Devise'])
+angular.module('monostackTest', ['ui.router', 'templates', 'Devise', 'isteven-multi-select'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
-
   $stateProvider
     .state('home', {
       url: '/home',
