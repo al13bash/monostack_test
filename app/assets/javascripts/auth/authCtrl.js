@@ -3,7 +3,12 @@ angular.module('monostackTest')
 '$scope',
 '$state',
 'Auth',
-function($scope, $state, Auth){
+'$auth',
+function($scope, $state, Auth, $auth){
+  $scope.authenticate = function(provider) {
+    $auth.authenticate(provider);
+  };
+
   $scope.login = function() {
     Auth.login($scope.user).then(function(){
       $state.go('home');

@@ -1,4 +1,5 @@
 //= require angular
+//= require satellizer
 //= require AngularDevise
 //= require angular-rails-templates
 //= require angular-ui-router

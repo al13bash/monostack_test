@@ -1,8 +1,9 @@
-angular.module('monostackTest', ['ui.router', 'templates', 'Devise', 'isteven-multi-select'])
+angular.module('monostackTest', ['satellizer', 'ui.router', 'templates', 'Devise', 'isteven-multi-select'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',
-function($stateProvider, $urlRouterProvider) {
+'$authProvider',
+function($stateProvider, $urlRouterProvider, $authProvider) {
   $stateProvider
     .state('home', {
       url: '/home',
@@ -44,6 +45,24 @@ function($stateProvider, $urlRouterProvider) {
         })
       }]
     });
+
+  $authProvider.facebook({
+    clientId: '1607361349517928'
+  });
+
+  $authProvider.oauth2({
+    name: 'vkontakte',
+    url: '/auth/vk',
+    redirectUri:window.location.origin || window.location.protocol + '//' + window.location.host,
+    clientId: '4982591',
+    authorizationEndpoint: 'http://oauth.vk.com/authorize',
+    scope: 'friends, photos, email, photo_big',
+    display: 'popup',
+    responseType: 'code',
+    requiredUrlParams: ['response_type', 'client_id', 'redirect_uri', 'display', 'scope', 'v'],
+    scopeDelimiter: ',',
+    v: '5.37'
+  });
 
   $urlRouterProvider.otherwise('home');
 }]);
