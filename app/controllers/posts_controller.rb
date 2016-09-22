@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: :create
+  load_and_authorize_resource
 
   def index
     respond_with Post.where(status: 'approved')

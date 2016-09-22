@@ -20,7 +20,8 @@ class AuthController < ApplicationController
     if @oauth.authorized?
       @user = User.from_auth(@oauth.formatted_user_data, current_user)
       if @user
-        render_success(token: Token.encode(@user.id), id: @user.id)
+        sign_in @user, event: :authentication
+        render_success(user: @user, token: Token.encode(@user.id), id: @user.id)
       else
         render_error "This #{params[:provider]} account is used already"
       end

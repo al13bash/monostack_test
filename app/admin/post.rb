@@ -12,5 +12,12 @@ ActiveAdmin.register Post do
 #   permitted
 # end
 
-  permit_params :status
+  permit_params :status, :title, :body, :price, category_ids: []
+
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.input :categories, as: :select, input_html: { multiple: true }
+    f.actions
+  end
 end

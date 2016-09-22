@@ -2,7 +2,8 @@ angular.module('monostackTest')
 .controller('MainCtrl', [
 '$scope',
 'posts',
-function($scope, posts){
+'Auth',
+function($scope, posts, Auth){
   $scope.posts = posts.posts;
   $scope.categoriesSingle = posts.categories;
   $scope.categories = posts.categories;
@@ -14,6 +15,10 @@ function($scope, posts){
   $scope.fReset = function(){
     posts.getAll();
   };
+
+  $scope.$on('devise:new-session', function(e, user){
+    $scope.user = user;
+  });
 
   $scope.addPost = function(){
     if(!$scope.title || $scope.title === '' &&
@@ -29,6 +34,8 @@ function($scope, posts){
     $scope.title = '';
     $scope.body = '';
     $scope.price = '';
-    $scope.selectedCategories = [];
+    angular.forEach($scope.categories, function(category) {
+      category.ticked = false;
+    })
   };
 }]);

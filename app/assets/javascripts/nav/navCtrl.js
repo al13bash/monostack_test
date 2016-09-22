@@ -3,10 +3,20 @@ angular.module('monostackTest')
 '$scope',
 'Auth',
 function($scope, Auth){
-  $scope.signedIn = Auth.isAuthenticated;
+  $scope.signedIn = function(){
+    if($scope.user)
+      return true;
+    else
+      return Auth.isAuthenticated();
+  };
+
   $scope.logout = Auth.logout;
 
   Auth.currentUser().then(function (user){
+    $scope.user = user;
+  });
+
+  $scope.$on('devise:new-session', function(e, user){
     $scope.user = user;
   });
 
@@ -19,6 +29,6 @@ function($scope, Auth){
   });
 
   $scope.$on('devise:logout', function (e, user){
-    $scope.user = {};
+    $scope.user = null;
   });
 }]);

@@ -37,6 +37,7 @@ class User < ApplicationRecord
     fallback_name        = params[:name].split(" ") if params[:name]
     fallback_first_name  = fallback_name.try(:first)
     fallback_last_name   = fallback_name.try(:last)
+    user.username ||= "#{params[:first_name]} #{params[:last_name]}"
     # user.first_name    ||= (params[:first_name] || fallback_first_name)
     # user.last_name     ||= (params[:last_name]  || fallback_last_name)
 

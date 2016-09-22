@@ -9,7 +9,7 @@ class Ability
       can :manage, :all
     elsif user.role.user?
       can :read, :all
-      can :create, :Post
+      can :create, Post
       cannot :read, ActiveAdmin::Page
     else
       can :read, :all
